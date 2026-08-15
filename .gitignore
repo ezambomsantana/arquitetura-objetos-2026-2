@@ -1,0 +1,65 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+hs_err_pid*
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/
+
+# Gradle
+build/
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.eclipse/
+.classpath
+.project
+.settings/
+*.swp
+*.swo
+*~
+.vscode/
+*.code-workspace
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+*.swp
+
+# Windows
+Thumbs.db
+ehthumbs.db
+
+# Linux
+.directory
+
+# Compiled source
+*.com
+*.o
+*.so
+
+# Logs
+*.log
+logs/
+
+# Runtime data
+*.pid
