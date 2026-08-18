@@ -9,14 +9,17 @@ public class Main {
 
     public static boolean buscaLivro(ArrayList<Livro> livros, String nomeLivro) {
         for (Livro l : livros) {
-            if (l.nome.equals(nomeLivro)) {
+            if (l.getNome().equals(nomeLivro)) {
                 return true;
             }
         }
+
         return false;
     }
 
     public static void main(String[] args) {
+        
+
 
         String nomeBiblioteca = "Biblioteca do Insper";
         int anoAtual = 2026;
@@ -26,18 +29,39 @@ public class Main {
         System.out.println(String.format("Ano %s", anoAtual));
         System.out.println();
 
-        Livro livro1 = new Livro("1984", "George Orwell", 1949);
+        Editora editora = new Editora("Editora do Insper",
+                "Rua Quata", 2000);
+
+        editora.addLivro(null);
+
+        Autor autor = new Autor("Joao", "Sao Paulo", 30);
+
+        editora.printLivros();
+
+        Livro livro1 = new Livro("1984", 1949);
+        livro1.setEditora(editora);
+        editora.addLivro(livro1);
+
+        livro1.getAutores().add(autor);
+        autor.getLivros().add(livro1);
+
+        editora.printLivros();
 
         System.out.println("");
         livro1.emprestar();
 
-        buscaLivro(null, null);
-        Livro livro2 = new Livro();
-        livro2.nome = "Duna";
-        livro2.autor = "Frank Herbert";
-        livro2.ano = 1965;
+        Livro livro2 = new Livro("Duna",  1965);
+        livro2.setEditora(editora);
 
-        Livro livro3 = new Livro("Neuromancer", "William Gibson", 1984);
+        editora.addLivro(livro2);
+
+        System.out.println(livro2.getNome());
+        editora.printLivros();
+
+        Livro livro3 = new Livro("Neuromancer", 1984);
+        livro3.setEditora(editora);
+        editora.addLivro(livro3);
+
 
         ArrayList<Livro> lista = new ArrayList<>();
         lista.add(livro1);
@@ -46,12 +70,14 @@ public class Main {
 
         System.out.println("===Livros===");
         for (Livro l : lista) {
-            System.out.println(l.nome);
+            System.out.println(l.getNome());
         }
 
         HashSet<String> autores = new HashSet<>();
         for (Livro l : lista) {
-            autores.add(l.autor);
+            for (Autor a :l.getAutores()) {
+                autores.add(a.getNome());
+            }
         }
 
 
