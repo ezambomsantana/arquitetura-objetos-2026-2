@@ -97,6 +97,7 @@ Para calcular a pontuação, considere:
 - `golMandante`
 - `golVisitate`
 - `cartoes`
+- `campeonato`
 
 ### Métodos
 
@@ -116,6 +117,7 @@ Para calcular a pontuação, considere:
 - `jogador`
 - `minuto`
 - `tipo`
+- `partida`
 
 O tipo do cartão pode ser `"AMARELO"` ou `"VERMELHO"`.
 
