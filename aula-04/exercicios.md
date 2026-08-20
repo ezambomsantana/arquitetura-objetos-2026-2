@@ -45,7 +45,6 @@ Implemente um sistema para controlar um campeonato de futebol.
 - `listarPartidas()`
 - `buscarTime(String nome)`
 - `exibirClassificacao()`
-- `buscarArtilheiro()`
 
 O método `exibirClassificacao()` deve mostrar os times ordenados pela quantidade de pontos.
 
