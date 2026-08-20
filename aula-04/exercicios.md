@@ -84,6 +84,7 @@ Para calcular a pontuação, considere:
 - `numero`
 - `posicao`
 - `time`
+- `idade`
 
 ---
 
