@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Livro {
 
+    private String isbn;
     private String nome;
     private int ano;
     private boolean disponivel;
@@ -15,7 +16,8 @@ public class Livro {
         nome = "Teste";
     }
 
-    public Livro(String nome, int ano) {
+    public Livro(String isbn, String nome, int ano) {
+        this.isbn = isbn;
         this.nome = nome;
         this.ano = ano;
         this.disponivel = true;
@@ -29,6 +31,14 @@ public class Livro {
         } else {
             return "Livro já está emprestado";
         }
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public String getNome() {
@@ -63,11 +73,13 @@ public class Livro {
     }
 
     public String toString() {
-        return nome + " " + ano;
+        return nome + " " + ano + "  " + editora.getNome();
     }
 
     public ArrayList<Autor> getAutores() {
         return autores;
     }
+
+
 
 }
