@@ -36,7 +36,7 @@ Implemente uma API REST para gerenciar o campeonato de futebol, aplicando as reg
 ### 4. Gerenciamento do Campeonato (`/campeonatos`)
 - **`GET /campeonatos/{id}/classificacao`**: Retorna a tabela de classificação do campeonato ordenada decrescentemente por pontos. 
   - *Regra de pontuação:* Vitória = 3 pontos, Empate = 1 ponto, Derrota = 0 pontos.
-- **`GET /campeonatos/{id}/artilheiro`**: Retorna o jogador com mais gols marcados nas partidas do campeonato.
+- **`POST /campeonatos`**: Cria um novo campeonato.
 
 ---
 
