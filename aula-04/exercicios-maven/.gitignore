@@ -1,0 +1,30 @@
+# Maven
+target/
+*.jar
+*.war
+*.ear
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Compiled
+*.class
+*.log
+
+# Package Files
+*.zip
+*.tar.gz
+*.rar
