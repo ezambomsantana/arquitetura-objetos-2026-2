@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Estes exercícios dão continuidade aos domínios de Orientação a Objetos anteriores (Campeonato de Futebol e Loja Virtual), desafiando os alunos a transformar classes Java puras em **APIs RESTful** completas utilizando **Spring Boot**, **Spring Data JPA**, **Bean Validation** e boas práticas de arquitetura em camadas.
+Estes exercícios dão continuidade aos domínios de Orientação a Objetos anteriores (Campeonato de Futebol e Loja Virtual), desafiando os alunos a transformar classes Java puras em **APIs RESTful** completas utilizando o framework **Spring** e boas práticas de arquitetura em camadas.
 
 Para cada exercício:
 1. Utilize o Spring Initializr para estruturar o projeto com as dependências necessárias (`Spring Web`).
@@ -10,31 +10,37 @@ Para cada exercício:
 
 ---
 
-# Exercício 3 – API REST para o Campeonato de Futebol
+# Exercício 1 – API REST para o Campeonato de Futebol
 
 Implemente uma API REST para gerenciar o campeonato de futebol, aplicando as regras de negócio de pontuação, cadastro de jogadores e registro de partidas.
 
 ## Endpoints e Requisitos
 
-### 1. Gerenciamento de Times (`/times`)
-- **`POST /times`**: Cadastra um novo time. Valide se o nome e a cidade foram informados.
+
+### 1. Gerenciamento de Jogadores (`/jogadores`)
+- **`POST /jogadores`**: Cadastra um novo jogador. 
+- **`GET /jogadores`**: Lista todos os jogadores cadastrados.
+- **`GET /jogadores/{id}`**: Busca um jogador específico por ID.
+
+### 2. Gerenciamento de Times (`/times`)
+- **`POST /times`**: Cadastra um novo time.
 - **`GET /times`**: Lista todos os times cadastrados.
 - **`GET /times/{id}`**: Busca um time específico por ID, retornando também a lista de seus jogadores.
-- **`POST /times/{id}/jogadores`**: Adiciona um novo jogador a um time existente.
+- **`POST /times/{idTime}/jogadores/{idJogador}`**: Adiciona um novo jogador a um time existente.
 
-### 2. Gerenciamento de Partidas (`/partidas`)
+### 3. Gerenciamento de Partidas (`/partidas`)
 - **`POST /partidas`**: Registra uma nova partida informando a data, o time mandante e o time visitante. Valide que o mandante e o visitante não podem ser o mesmo time.
 - **`PATCH /partidas/{id}/placar`**: Atualiza os gols da partida (`golMandante` e `golVisitante`).
 - **`POST /partidas/{id}/cartoes`**: Registra um cartão (`AMARELO` ou `VERMELHO`) para um jogador durante a partida, informando o minuto.
 
-### 3. Gerenciamento do Campeonato (`/campeonatos`)
+### 4. Gerenciamento do Campeonato (`/campeonatos`)
 - **`GET /campeonatos/{id}/classificacao`**: Retorna a tabela de classificação do campeonato ordenada decrescentemente por pontos. 
   - *Regra de pontuação:* Vitória = 3 pontos, Empate = 1 ponto, Derrota = 0 pontos.
 - **`GET /campeonatos/{id}/artilheiro`**: Retorna o jogador com mais gols marcados nas partidas do campeonato.
 
 ---
 
-# Exercício 4 – API REST para a Loja Virtual (E-commerce)
+# Exercício 2 – API REST para a Loja Virtual (E-commerce)
 
 Desenvolva uma API REST robusta para gerenciar a Loja Virtual, garantindo controle de categorias, histórico de preços em pedidos e paginação.
 
