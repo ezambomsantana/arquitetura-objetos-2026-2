@@ -1,10 +1,26 @@
 package br.edu.insper.biblioteca;
 
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+//Singleton
+@Service
 public class EditoraService {
+
+   /* private static EditoraService editoraService;
+
+    public static EditoraService getInstance() {
+        if (editoraService == null) {
+            editoraService = new EditoraService();
+        }
+        return editoraService;
+    }
+
+    private EditoraService() {}
+*/
 
     private HashMap<String, Editora> editoras = new HashMap<>();
 
@@ -26,18 +42,6 @@ public class EditoraService {
         }
         return false;
     }
-
-    public void imprimirLivros(String cnpj) {
-        Editora editora = buscar(cnpj);
-        System.out.println("#### Lista de Livros ####");
-        editora.imprimirLivros();
-    }
-
-    public void contaLivros(String cnpj) {
-        Editora editora = buscar(cnpj);
-        System.out.println(editora.contaLivros());
-    }
-
 
     public ArrayList<Editora> listar(String nome) {
         if (nome != null) {

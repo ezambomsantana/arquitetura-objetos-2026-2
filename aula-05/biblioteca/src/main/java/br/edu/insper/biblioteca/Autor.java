@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Autor {
 
+    private String cpf;
     private String nome;
     private String localNascimento;
     private int idade;

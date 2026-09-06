@@ -1,6 +1,7 @@
 package br.edu.insper.biblioteca;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,8 @@ import java.util.ArrayList;
 @RestController
 public class EditoraController {
 
-    private EditoraService editoraService = new EditoraService();
+    @Autowired
+    private EditoraService editoraService;
 
     @PostMapping("/editora")
     @ResponseStatus(HttpStatus.CREATED)
