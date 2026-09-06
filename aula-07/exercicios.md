@@ -36,7 +36,7 @@ Implemente uma API REST para gerenciar o campeonato de futebol, aplicando as reg
 ### 4. Gerenciamento do Campeonato (`/campeonatos`)
 - **`GET /campeonatos/{id}/classificacao`**: Retorna a tabela de classificação do campeonato ordenada decrescentemente por pontos. 
   - *Regra de pontuação:* Vitória = 3 pontos, Empate = 1 ponto, Derrota = 0 pontos.
-- **`GET /campeonatos/{id}/artilheiro`**: Retorna o jogador com mais gols marcados nas partidas do campeonato.
+- **`POST /campeonatos`**: Cria um novo campeonato.
 
 ---
 
@@ -49,11 +49,11 @@ Desenvolva uma API REST robusta para gerenciar a Loja Virtual, garantindo contro
 ### 1. Categorias e Produtos (`/categorias` e `/produtos`)
 - **`POST /categorias`**: Cadastra uma nova categoria.
 - **`POST /produtos`**: Cadastra um produto associado a uma categoria existente.
-- **`GET /produtos`**: Lista os produtos de forma paginada (`Pageable`), permitindo um filtro opcional por categoria através de Query Parameter (`?categoriaId=...`).
-- **`PATCH /produtos/{id}/desconto`**: Aplica um percentual de desconto no preço atual do produto.
+- **`GET /produtos`**: Lista os produtos, permitindo um filtro opcional por categoria através de Query Parameter (`?categoriaId=...`).
 
 ### 2. Clientes (`/clientes`)
 - **`POST /clientes`**: Cadastra um novo cliente (valide formato de CPF e unicidade).
+- **`GET /clientes`**: Lista todos os cleitnes cadastrados.
 - **`GET /clientes/{cpf}/pedidos`**: Lista todos os pedidos realizados por um cliente específico, calculando o valor total gasto em cada um.
 
 ### 3. Pedidos e Itens (`/pedidos`)
