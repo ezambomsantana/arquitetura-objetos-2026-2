@@ -10,18 +10,6 @@ import java.util.UUID;
 @Service
 public class EditoraService {
 
-   /* private static EditoraService editoraService;
-
-    public static EditoraService getInstance() {
-        if (editoraService == null) {
-            editoraService = new EditoraService();
-        }
-        return editoraService;
-    }
-
-    private EditoraService() {}
-*/
-
     private HashMap<String, Editora> editoras = new HashMap<>();
 
     public Editora criar(Editora editora) {
