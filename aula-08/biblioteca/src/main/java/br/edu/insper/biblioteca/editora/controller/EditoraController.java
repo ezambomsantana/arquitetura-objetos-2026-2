@@ -1,6 +1,9 @@
-package br.edu.insper.biblioteca;
+package br.edu.insper.biblioteca.editora.controller;
 
 
+import br.edu.insper.biblioteca.editora.model.Editora;
+import br.edu.insper.biblioteca.editora.dto.EditoraLivrosDTO;
+import br.edu.insper.biblioteca.editora.service.EditoraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +23,7 @@ public class EditoraController {
     }
 
     @GetMapping("/editora/{id}")
-    public Editora getEditora(@PathVariable String id) {
+    public Object getEditora(@PathVariable String id) {
         return editoraService.buscar(id);
     }
 
@@ -33,6 +36,11 @@ public class EditoraController {
     @GetMapping("/editora")
     public ArrayList<Editora> getEditoras(@RequestParam(required = false) String nome) {
         return editoraService.listar(nome);
+    }
+
+    @GetMapping("/editora/conta-livros")
+    public ArrayList<EditoraLivrosDTO> getContaLivros() {
+        return editoraService.getNumeroLivrosEditora();
     }
 
 

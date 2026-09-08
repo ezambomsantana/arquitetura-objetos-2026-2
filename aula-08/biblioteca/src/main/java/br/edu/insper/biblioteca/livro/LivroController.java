@@ -1,4 +1,4 @@
-package br.edu.insper.biblioteca;
+package br.edu.insper.biblioteca.livro;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

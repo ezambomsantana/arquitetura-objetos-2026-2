@@ -1,5 +1,7 @@
-package br.edu.insper.biblioteca;
+package br.edu.insper.biblioteca.livro;
 
+import br.edu.insper.biblioteca.editora.model.Editora;
+import br.edu.insper.biblioteca.editora.service.EditoraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,6 @@
-package br.edu.insper.biblioteca;
+package br.edu.insper.biblioteca.autor;
+
+import br.edu.insper.biblioteca.livro.Livro;
 
 import java.util.ArrayList;
 
