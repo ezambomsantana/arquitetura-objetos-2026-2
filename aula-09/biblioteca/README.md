@@ -1,57 +1,110 @@
 # Aula 08 - 08/09/2026
 
-## Adicionar swagger
+## Spring Security
 
-O swagger é uma documentação da API gerada automaticamente.
+```xml
 
-Além de ser uma documentação ela também ajuda nos testes da API.
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
 ```
-<dependency>
-    <groupId>org.springdoc</groupId>
-    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-    <version>3.1.0</version>
-</dependency>
-```
 
-## DTOs para rotas que não retornam dados do modelo
+## Config
 
-Algumas rotas podem retornar dados que não são diretamente do modelo,
-por exemplo, podemos ter uma rota que retorna quantos livros cada editora possui.
+```java
+package br.edu.insper.biblioteca.utils;
 
-Para ter esse tipo de dado, é usado um padrão de projeto chamado DTO (Data Transfer Object),
-nele criamos uma classe que representa esse tipo de dado. Por exemplo:
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
-``` java
-public class EditoraLivroDTO {
-    private String nomeEditora;
-    private Integer numeroLivros;
-    
-    //gets e sets
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
+                        .anyRequest().authenticated()
+                )
+                .httpBasic(Customizer.withDefaults())
+                .build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
 ```
 
-## Tratamento de erros
-
-No Java, temos um tratamento de erros parecido com o python,
-com o `try/catch` ao invés do `try/except` e o `throw` ao invés do `raise`.
-
-As classes princiapais de exceções sãs a `Exception` e a `RuntimeException`.
-Vamos usar principalmente a RuntimeException, com ela podemos criar exceções próprias,
-como a `LivroNotFoundException`. Com ela, podemos fazer o tratamento dessa exceção para
-retornar uma mensagem para o usuário e o código de erro correto.
 
 
-```java
-    @ExceptionHandler(LivroNotFoundException.class)
-    @ResponseBody
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponseDTO erro(LivroNotFoundException re) {
-        ErrorResponseDTO error = new ErrorResponseDTO();
-        error.setMessage(re.getMessage());
-        error.setCode(HttpStatus.NOT_FOUND.value());
-        error.setDate(LocalDateTime.now());
-        return error;
+```service
+package br.edu.insper.biblioteca.usuario;
+
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Service
+public class UsuarioService implements UserDetailsService {
+
+    private final Map<String, UserDetails> usuarios = new HashMap<>();
+    private final PasswordEncoder passwordEncoder;
+
+    public UsuarioService(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
+
+    public UserDetails criarUsuario(String email, String senha) {
+        UserDetails usuario = User.builder()
+                .username(email)
+                .password(passwordEncoder.encode(senha))
+                .roles("USER")
+                .build();
+
+        usuarios.put(email, usuario);
+        return usuario;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email)
+            throws UsernameNotFoundException {
+
+        UserDetails usuario = usuarios.get(email);
+
+        if (usuario == null) {
+            throw new UsernameNotFoundException("Usuário não encontrado");
+        }
+
+        return usuario;
+    }
+}
+
+
 ```
 
+
+### Exercícios
+
+1) Implementar a rota de recuperação de senha
+2) Implementar a rota de listagem de usuários
+3) Liberar o swagger no SecurityConfig
