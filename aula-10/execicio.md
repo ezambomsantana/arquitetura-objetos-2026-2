@@ -10,6 +10,8 @@
 - Locacao: id, dataInicio, dataFim, e uma relação com cliente e equipamento.
 
 
+### Requisitos
+
 - Todas as entidades devem possuir rotas para criar, listar, buscar por id, editar e excluir.
 - A exclusão deve ser lógica, por meio do atributo deleted, com valor booleano. Nenhuma operação pode ser realizada sobre registros excluídos.
 - Na criação de uma locação, o cliente deve ser informado no body da requisição, e o sistema deve selecionar automaticamente um equipamento ativo. 
