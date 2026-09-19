@@ -1,12 +1,12 @@
 package br.edu.insper.equipamento.equipamento;
 
-import br.edu.insper.equipamento.equipamento.Equipamento;
-import br.edu.insper.equipamento.equipamento.EquipamentoNaoEncontradoException;
 import br.edu.insper.equipamento.common.CampoInvalidoException;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@Service
 public class EquipamentoService {
 
     private HashMap<String, Equipamento> equipamentos = new HashMap<>();
