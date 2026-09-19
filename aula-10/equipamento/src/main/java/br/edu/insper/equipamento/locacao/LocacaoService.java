@@ -54,6 +54,7 @@ public class LocacaoService {
 
         Equipamento equipamento = equipamentoService.getPrimeiroDisponivel();
         equipamento.setDisponivel(false);
+        locacao.setEquipamento(equipamento);
 
         locacao.setId(UUID.randomUUID().toString());
 
