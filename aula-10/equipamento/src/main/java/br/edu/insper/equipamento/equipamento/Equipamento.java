@@ -6,6 +6,7 @@ public class Equipamento {
     private int valorDiaria;
     private String codigoPatrimonio;
     private boolean disponivel;
+    private boolean deleted = false;
 
     public String getNome() {
         return nome;
@@ -45,5 +46,13 @@ public class Equipamento {
 
     public void setDisponivel(boolean disponivel) {
         this.disponivel = disponivel;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

@@ -33,7 +33,7 @@ public class EquipamentoController {
         return equipamentoService.getEquipamento(id);
     }
 
-    @DeleteMapping("/clietes/{id}")
+    @DeleteMapping("/equipamentos/{id}")
     public void deleteEquipamento(@PathVariable String id) {
         equipamentoService.deleteEquipamento(id);
     }

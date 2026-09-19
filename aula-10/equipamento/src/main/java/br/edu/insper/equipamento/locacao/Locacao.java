@@ -12,6 +12,7 @@ public class Locacao {
 
     private Equipamento equipamento;
     private Cliente cliente;
+    private boolean deleted = false;
 
     public String getId() {
         return id;
@@ -51,5 +52,13 @@ public class Locacao {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

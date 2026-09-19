@@ -6,6 +6,7 @@ public class Cliente {
     private String cpf;
     private String email;
     private String telefone;
+    private boolean deleted = false;
 
     public String getNome() {
         return nome;
@@ -37,5 +38,13 @@ public class Cliente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

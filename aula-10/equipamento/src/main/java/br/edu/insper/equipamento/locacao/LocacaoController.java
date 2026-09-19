@@ -7,33 +7,34 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
+@RestController
 public class LocacaoController {
 
 
     @Autowired
     private LocacaoService locacaoService;
 
-    @GetMapping("/locacaos")
+    @GetMapping("/locacoes")
     public ArrayList<Locacao> getLocacoes() {
         return locacaoService.getLocacoes();
     }
 
-    @PostMapping("/locacaos")
+    @PostMapping("/locacoes")
     public Locacao addLocacao(@RequestBody Locacao locacao) {
         return locacaoService.addLocacao(locacao);
     }
 
-    @PutMapping("/locacaos/{id}")
+    @PutMapping("/locacoes/{id}")
     public Locacao editLocacao(@PathVariable String id, @RequestBody Locacao locacao) {
         return locacaoService.editLocacao(id, locacao);
     }
 
-    @GetMapping("/locacaos/{id}")
+    @GetMapping("/locacoes/{id}")
     public Locacao getLocacao(@PathVariable String id) {
         return locacaoService.getLocacao(id);
     }
 
-    @DeleteMapping("/clietes/{id}")
+    @DeleteMapping("/locacoes/{id}")
     public void deleteLocacao(@PathVariable String id) {
         locacaoService.deleteLocacao(id);
     }
