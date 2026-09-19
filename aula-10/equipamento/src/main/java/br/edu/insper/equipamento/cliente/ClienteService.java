@@ -43,7 +43,7 @@ public class ClienteService {
         }
 
         if (cliente.getEmail() != null || cliente.getEmail().isEmpty()) {
-            clienteSalvo.setNome(cliente.getEmail());
+            clienteSalvo.setEmail(cliente.getEmail());
         }
 
         clientes.put(cpf, clienteSalvo);
