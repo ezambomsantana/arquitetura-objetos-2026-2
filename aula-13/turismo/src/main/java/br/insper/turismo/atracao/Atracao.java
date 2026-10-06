@@ -1,7 +1,12 @@
 package br.insper.turismo.atracao;
 
 import br.insper.turismo.destino.Destino;
+import br.insper.turismo.visitante.Visitante;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Atracao {
@@ -17,6 +22,14 @@ public class Atracao {
     @ManyToOne
     @JoinColumn(name = "id_destino")
     private Destino destino;
+
+    @ManyToMany
+    @JoinTable(
+            name = "atracao_visitante",
+            joinColumns = @JoinColumn(name = "id_atracao"),
+            inverseJoinColumns = @JoinColumn(name = "id_visitante")
+    )
+    private List<Visitante> visitantes = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -48,5 +61,13 @@ public class Atracao {
 
     public void setDestino(Destino destino) {
         this.destino = destino;
+    }
+
+    public List<Visitante> getVisitantes() {
+        return visitantes;
+    }
+
+    public void setVisitantes(List<Visitante> visitantes) {
+        this.visitantes = visitantes;
     }
 }

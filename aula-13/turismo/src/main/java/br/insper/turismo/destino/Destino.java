@@ -1,6 +1,7 @@
 package br.insper.turismo.destino;
 
 import br.insper.turismo.atracao.Atracao;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class Destino {
     @Column(nullable = false)
     private String pais;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "destino")
     private List<Atracao> atracoes;
 

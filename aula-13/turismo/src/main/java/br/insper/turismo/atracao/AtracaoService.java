@@ -29,4 +29,9 @@ public class AtracaoService {
     }
 
 
+    public Atracao getById(int idAtracao) {
+        return atracaoRepository
+                .findById(idAtracao)
+                .orElseThrow(() -> new RuntimeException("Atracao nao encontrada"));
+    }
 }
