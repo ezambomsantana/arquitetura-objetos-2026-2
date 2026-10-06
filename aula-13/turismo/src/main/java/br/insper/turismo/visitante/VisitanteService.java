@@ -4,6 +4,7 @@ import br.insper.turismo.atracao.Atracao;
 import br.insper.turismo.atracao.AtracaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class VisitanteService {
         Visitante visitante = getById(idVisitante);
 
         visitante.getAtracaos().add(atracao);
+        atracao.getVisitantes().add(visitante);
 
         return visitanteRepository.save(visitante);
 

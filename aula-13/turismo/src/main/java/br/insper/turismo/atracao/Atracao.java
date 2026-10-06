@@ -23,6 +23,7 @@ public class Atracao {
     @JoinColumn(name = "id_destino")
     private Destino destino;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "atracao_visitante",
