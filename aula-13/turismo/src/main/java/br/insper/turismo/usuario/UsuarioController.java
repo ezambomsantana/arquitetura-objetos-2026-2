@@ -12,7 +12,7 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping("/usuarios")
-    public CreateUserDTO createUser(@RequestBody CreateUserDTO createUserDTO) {
+    public User createUser(@RequestBody User createUserDTO) {
         return usuarioService
                 .create(createUserDTO);
     }
