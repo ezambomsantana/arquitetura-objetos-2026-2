@@ -187,21 +187,32 @@ public class SecurityConfig {
 
 Novo endpoint para realizar login e obter o token:
 
+Primeiro criamos na UsuarioService um novo método de login.
+
+```java
+    public LoginResponse login(LoginRequest loginRequest) {
+        try {
+            UserDetails userDetails = this.loadUserByUsername(loginRequest.getEmail());
+
+            if (!passwordEncoder.matches(loginRequest.getSenha(), userDetails.getPassword())) {
+                throw new RuntimeException("Senha inválida");
+            }
+
+            String token = jwtService.generateToken(loginRequest.getEmail());
+            return new LoginResponse(token);
+        } catch (UsernameNotFoundException e) {
+            throw new RuntimeException("Usuário não encontrado");
+        }
+    }
+
+```
+
+Depois criamos a nova rota no UsuarioController
+
 ```java
 @PostMapping("/login")
-public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-    try {
-        UserDetails userDetails = usuarioService.loadUserByUsername(loginRequest.getEmail());
-
-        if (!passwordEncoder.matches(loginRequest.getSenha(), userDetails.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
-        }
-
-        String token = jwtService.generateToken(loginRequest.getEmail());
-        return ResponseEntity.ok(new LoginResponse(token));
-    } catch (UsernameNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário não encontrado");
-    }
+public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+    return usuarioService.login(loginRequest);
 }
 ```
 
