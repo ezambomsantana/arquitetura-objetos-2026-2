@@ -252,7 +252,32 @@ jwt.expiration=3600000
 **⚠️ IMPORTANTE:**
 - A chave secreta (`jwt.secret`) deve ter **no mínimo 32 caracteres**
 - Utilize uma chave forte em produção
-- **Nunca** commite a chave real no repositório, use variáveis de ambiente
+- **Nunca** commite a chave real no repositório, use variáveis de ambiente (em um ambiente de produção)
+
+
+
+#### 8. Configuração do Swagger (application.properties)
+
+```java
+@Configuration
+@OpenAPIDefinition(
+        info = @Info(
+        title = "API Turismo",
+        version = "1.0.0",
+        description = "API para gestão de destinos turísticos"
+    ),
+    security = @SecurityRequirement(name = "bearerAuth")
+)
+@SecurityScheme(
+    name = "bearerAuth",
+    type = SecuritySchemeType.HTTP,
+    scheme = "bearer",
+    bearerFormat = "JWT",
+    description = "Autenticação via token JWT"
+)
+public class OpenApiConfig {
+}
+```
 
 
 ## Validação com Spring Validation
