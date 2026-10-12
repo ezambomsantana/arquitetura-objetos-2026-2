@@ -255,7 +255,85 @@ jwt.expiration=3600000
 - **Nunca** commite a chave real no repositório, use variáveis de ambiente
 
 
-## Usar DTOs para requisições e respostas
+## Validação com Spring Validation
+
+### Validação de Campos
+
+A aplicação utiliza **Spring Validation** para validar os dados de entrada. Campos obrigatórios são validados automaticamente através de anotações.
+
+### Exemplo: Validação de Visitantes
+
+### 1. Dependência Maven
+
+A validação requer a dependência `spring-boot-starter-validation`:
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+```
 
 
-## Melhorar a validação e o tratamento  de erros
+#### 2. Anotações de Validação (Visitante.java)
+
+Adicione as anotações `@NotNull` e `@NotEmpty` aos campos:
+
+```java
+@Entity
+public class Visitante {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @NotNull(message = "Nome não pode ser nulo")
+    @NotEmpty(message = "Nome não pode ser vazio")
+    @Column(nullable = false)
+    private String nome;
+
+    @NotNull(message = "CPF não pode ser nulo")
+    @NotEmpty(message = "CPF não pode ser vazio")
+    @Column(nullable = false, unique = true)
+    private String cpf;
+
+    // getters e setters...
+}
+```
+
+#### 3. Anotação @Valid no Controller
+
+Use `@Valid` no parâmetro do método para ativar a validação:
+
+```java
+@PostMapping("/visitantes")
+public Visitante salvar(@Valid @RequestBody Visitante visitante) {
+    return visitanteService.salvar(visitante);
+}
+```
+
+#### 4. GlobalExceptionHandler para Tratamento de Erros
+
+Crie um `GlobalExceptionHandler` para capturar erros de validação:
+
+```java
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ErrorResponseDTO handleValidationException(
+            MethodArgumentNotValidException ex) {
+
+        ErrorResponseDTO errors = new ErrorResponseDTO();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+                errors.getErrors().add(error.getDefaultMessage())
+        );
+
+        errors.setStatus(HttpStatus.BAD_REQUEST.value());
+        errors.setMessage("Erro de validação");
+
+        return errors;
+    }
+}
+
+```
