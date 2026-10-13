@@ -18,6 +18,9 @@ public class UsuarioService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JwtService jwtService;
+
     public User create(User userDTO) {
 
         userDTO.setSenha(passwordEncoder.encode(userDTO.getSenha()));
@@ -39,6 +42,22 @@ public class UsuarioService implements UserDetailsService {
                 .password(userDTO.getSenha())
                 .build();
 
+    }
+
+
+    public LoginResponse login(LoginRequest loginRequest) {
+        try {
+            UserDetails userDetails = this.loadUserByUsername(loginRequest.getEmail());
+
+            if (!passwordEncoder.matches(loginRequest.getSenha(), userDetails.getPassword())) {
+                throw new RuntimeException("Senha inválida");
+            }
+
+            String token = jwtService.generateToken(loginRequest.getEmail());
+            return new LoginResponse(token);
+        } catch (UsernameNotFoundException e) {
+            throw new RuntimeException("Usuário não encontrado");
+        }
     }
 
 }
