@@ -1,5 +1,6 @@
 package br.insper.turismo.visitante;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class VisitanteController {
     }
 
     @PostMapping("/visitantes")
-    public Visitante salvar(@RequestBody Visitante visitante) {
+    public Visitante salvar(@Valid @RequestBody Visitante visitante) {
         return visitanteService.salvar(visitante);
     }
 
