@@ -27,9 +27,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/login").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers("/swagger-ui.html", "/h2-console/**",
                                 "/swagger-ui/**", "/v3/api-docs/**", "/swagger-resources/**",
