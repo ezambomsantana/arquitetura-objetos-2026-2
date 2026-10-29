@@ -5,8 +5,11 @@ Implemente uma API REST para gerenciamento de usuários e projetos.
 ### Entidades:
 
 - Pessoa
+  
 -- id
+
 -- nome
+
 -- cpf
 
 - Projeto
