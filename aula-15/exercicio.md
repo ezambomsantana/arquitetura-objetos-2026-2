@@ -10,13 +10,13 @@ Implemente uma API REST para gerenciamento de usuários e projetos.
   - cpf
 
 - Projeto
--- id
--- nome
--- descricao
+  - id
+  - nome
+  - descricao
 
 - Departamento
--- id
--- nome
+  - id
+  - nome
 
 Também adicione o login para que apenas um usuários cadastrado possa adicionar pessoas e projetos, e também relacionar pessoas e projetos, usando a autenticação com token JWT.
 
